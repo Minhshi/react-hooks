@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import NewsShow from './NewsShow';
 
 function NewsList() {
   const [news, setNews] = useState([]);
@@ -15,7 +17,11 @@ function NewsList() {
       <div>
         <ul>
           {news.map(nws => {
-            return <li>{nws.title}</li>;
+            return (
+              <li>
+                <Link to={`/${nws.objectID}`}>{nws.title}</Link>
+              </li>
+            );
           })}
         </ul>
       </div>
