@@ -1,7 +1,12 @@
 import React from 'react';
+import NewsList from './NewsList';
 
 function App() {
-  return <div>App</div>;
+  return (
+    <div>
+      <NewsList />
+    </div>
+  );
 }
 
 export default App;
