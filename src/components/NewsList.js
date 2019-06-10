@@ -5,18 +5,29 @@ import axios from 'axios';
 
 function NewsList() {
   const [news, setNews] = useState([]);
+  const [query, setQuery] = useState('');
+  const [search, setSearch] = useState('');
 
   useEffect( () => {
     async function fetchNews() {
-      const response = await axios.get('http://hn.algolia.com/api/v1/search?query=react');
+      const response = await axios.get(`http://hn.algolia.com/api/v1/search?query=${search}`);
       setNews(response.data.hits)
     };
     fetchNews();
-  }, [])
+  }, [search])
 
   return (
     <div className="news-list">
       <div className="h4">News</div>
+      <form >
+      <input
+      type="text"
+      value={query}
+      onChange={event => setQuery(event.target.value)}
+      />
+      <button type="button" onClick={() => setSearch(query)}>Search</button>
+      <button type="button" onClick={() => setQuery('')}>Clear</button>
+      </form>
       <div>
         <ul>
           {news.map(nws => {
