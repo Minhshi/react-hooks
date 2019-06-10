@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import NewsShow from './NewsShow';
+// import NewsShow from './NewsShow';
 
 function NewsList() {
   const [news, setNews] = useState([]);
 
-  useEffect(async () => {
-    const response = await axios.get('http://hn.algolia.com/api/v1/search?query=react');
-    setNews(response.data.hits);
-  }, []);
+  useEffect( () => {
+    async function fetchNews() {
+      const response = await axios.get('http://hn.algolia.com/api/v1/search?query=react');
+      setNews(response.data.hits)
+    };
+    fetchNews();
+  }, [])
 
   return (
     <div className="news-list">
@@ -18,7 +21,7 @@ function NewsList() {
         <ul>
           {news.map(nws => {
             return (
-              <li>
+              <li key={nws.objectID}>
                 <Link to={`/${nws.objectID}`}>{nws.title}</Link>
               </li>
             );
