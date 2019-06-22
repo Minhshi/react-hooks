@@ -1,0 +1,7 @@
+.primary {
+  background-color: pink;
+
+  &:disabled {
+    background-color: grey;
+  }
+}
